@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 AES - QR Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .qr-section {
+            text-align: center;
+            margin: 40px auto;
+            padding: 30px;
+            max-width: 800px;
+            background: rgba(16, 20, 31, 0.9);
+            border-radius: 15px;
+            border: 2px solid rgba(0, 162, 255, 0.3);
+        }
+        
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 25px 0;
+            box-shadow: 0 0 30px rgba(0, 162, 255, 0.3);
+        }
+        
+        .site-url {
+            background: rgba(10, 15, 25, 0.7);
+            border: 1px solid rgba(0, 162, 255, 0.3);
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 20px auto;
+            max-width: 600px;
+            word-break: break-all;
+            font-size: 18px;
+        }
+        
+        .instructions {
+            text-align: left;
+            background: rgba(0, 162, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #0066ff, #00a2ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="qr-section">
+        <h1 style="color: #00a2ff;">🔐 AES CRYPTOGRAPHY</h1>
+        <h2 style="color: #a0d2ff;">QR Code для доступа с телефона</h2>
+        
+        <div class="qr-container">
+            <div id="qrcode"></div>
+        </div>
+        
+        <div class="site-url" id="currentUrl">
+            Загрузка URL...
+        </div>
+        
+        <div class="instructions">
+            <h3><i class="fas fa-mobile-alt"></i> Как использовать:</h3>
+            <ol>
+                <li>Откройте <strong>камеру</strong> на телефоне</li>
+                <li>Наведите на <strong>QR код</strong> выше</li>
+                <li>Нажмите на <strong>уведомление/ссылку</strong></li>
+                <li>Откроется этот же сайт на вашем телефоне!</li>
+                <li>Используйте систему шифрования AES-256</li>
+            </ol>
+            
+            <p style="color: #ff9900; margin-top: 15px;">
+                <i class="fas fa-info-circle"></i> 
+                <strong>Важно:</strong> QR код ведет на текущий сайт. 
+                Если вы на localhost — только в вашей WiFi сети. 
+                Если на Render.com — работает везде!
+            </p>
+        </div>
+        
+        <a href="/" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Вернуться к шифрованию
+        </a>
+    </div>
+
+    <script>
+        // Получаем текущий URL сайта
+        const currentUrl = window.location.origin;
+        
+        // Показываем URL
+        document.getElementById('currentUrl').textContent = currentUrl;
+        document.getElementById('currentUrl').innerHTML = 
+            `<i class="fas fa-link"></i> ${currentUrl}`;
+        
+        // Генерируем QR код
+        QRCode.toCanvas(document.getElementById('qrcode'), currentUrl, {
+            width: 280,
+            margin: 2,
+            color: {
+                dark: '#000000',
+                light: '#FFFFFF'
+            }
+        }, function (error) {
+            if (error) {
+                console.error(error);
+                document.getElementById('qrcode').innerHTML = 
+                    '<p style="color: red; padding: 20px;">Ошибка создания QR кода</p>';
+            } else {
+                console.log("QR код создан для:", currentUrl);
+            }
+        });
+        
+        // Добавляем FontAwesome если нет
+        if (!document.querySelector('link[href*="font-awesome"]')) {
+            const fa = document.createElement('link');
+            fa.rel = 'stylesheet';
+            fa.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+            document.head.appendChild(fa);
+        }
+    </script>
+</body>
+</html>
