@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES-256 | REAL CRYPTO SYSTEM</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Герой секция -->
+    <div class="cyber-hero">
+        <div class="hero-bg">
+            <div class="cyber-grid"></div>
+            <div class="glow"></div>
+        </div>
+        <div class="title-block">
+            <div class="title-line top"></div>
+            <h1 class="main-title">AES</h1>
+            <h2 class="sub-title">CRYPTOGRAPHY</h2>
+            <div class="title-line bottom"></div>
+            <p class="tagline">Advanced Encryption Standard</p>
+        </div>
+        <div class="hero-buttons">
+            <button onclick="window.location.href='#demo'" class="cyber-btn">
+                <i class="fas fa-lock"></i> LIVE ENCRYPTION
+            </button>
+            <button id="genKeyBtn" class="cyber-btn">
+                <i class="fas fa-key"></i> GENERATE KEY
+            </button>
+            <button onclick="showRealQR()" class="cyber-btn" 
+                    style="background: linear-gradient(45deg, #ff3366, #33ccff);">
+                <i class="fas fa-qrcode"></i> SHOW REAL QR
+            </button>
+        </div>
+    </div>
+
+    <!-- Система шифрования -->
+    <div class="system-section" id="demo">
+        <h2><span class="highlight">AES-256</span> LIVE SYSTEM</h2>
+        <div class="system-container">
+            <!-- Левая панель -->
+            <div class="input-panel">
+                <h3><i class="fas fa-keyboard"></i> ENCRYPTION PANEL</h3>
+                <div class="input-group">
+                    <label>YOUR TEXT:</label>
+                    <textarea id="inputText">Test secret message</textarea>
+                </div>
+                <div class="input-group">
+                    <label>AES KEY (64 hex):</label>
+                    <input type="text" id="aesKey" placeholder="Click Generate...">
+                    <div class="key-actions">
+                        <button id="genKey">Generate</button>
+                        <button id="copyKey">Copy</button>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button id="encryptBtn" class="btn encrypt">
+                        <i class="fas fa-lock"></i> ENCRYPT
+                    </button>
+                    <button id="decryptBtn" class="btn decrypt">
+                        <i class="fas fa-unlock"></i> DECRYPT
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Правая панель -->
+            <div class="output-panel">
+                <h3><i class="fas fa-shield-alt"></i> RESULTS</h3>
+                <div class="result">
+                    <label>ENCRYPTED:</label>
+                    <div id="encryptedOutput" class="output">Waiting...</div>
+                </div>
+                <div class="result">
+                    <label>IV (Initialization Vector):</label>
+                    <div id="ivOutput" class="output"></div>
+                </div>
+                <div class="status">
+                    <div class="status-dot"></div>
+                    <span id="statusText">System Ready</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- QR код ПРЯМО НА СТРАНИЦЕ -->
+        <div class="qr-section" style="margin-top: 50px; text-align: center;">
+            <h3><i class="fas fa-mobile-alt"></i> SCAN THIS QR CODE WITH YOUR PHONE:</h3>
+            <div style="background: white; padding: 20px; display: inline-block; border-radius: 10px; margin: 20px;">
+                <img id="mainQrCode" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://aes-crypto-system.onrender.com" 
+                     alt="QR Code" style="width: 200px; height: 200px;">
+            </div>
+            <p style="color: #00ff00; font-family: monospace; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px;">
+                https://aes-crypto-system.onrender.com
+            </p>
+            <p style="color: #a0d2ff; margin-top: 10px;">
+                Open camera app → Point at QR code → Tap notification
+            </p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+    
+    <!-- QR код функция -->
+    <script>
+    // Функция для всплывающего QR
+    function showRealQR() {
+        const url = "https://aes-crypto-system.onrender.com";
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(url)}`;
+        
+        // Создаем большое всплывающее окно
+        const popup = document.createElement('div');
+        popup.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.97);
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        `;
+        
+        popup.innerHTML = `
+            <div style="
+                background: #0a0c12;
+                padding: 40px;
+                border-radius: 25px;
+                border: 4px solid #00a2ff;
+                text-align: center;
+                max-width: 600px;
+                box-shadow: 0 0 80px rgba(0, 162, 255, 0.7);
+            ">
+                <h1 style="color: #00a2ff; font-size: 32px; margin-bottom: 10px;">
+                    <i class="fas fa-qrcode"></i> AES CRYPTOGRAPHY
+                </h1>
+                <p style="color: #a0d2ff; margin-bottom: 30px; font-size: 18px;">
+                    Scan with phone camera to open this site
+                </p>
+                
+                <div style="
+                    background: white;
+                    padding: 25px;
+                    border-radius: 15px;
+                    display: inline-block;
+                    margin: 20px 0;
+                ">
+                    <img src="${qrUrl}" 
+                         alt="QR Code"
+                         style="width: 300px; height: 300px;"
+                         onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=SCAN-ME'">
+                </div>
+                
+                <div style="
+                    background: rgba(0,162,255,0.15);
+                    border: 2px solid #00a2ff;
+                    border-radius: 12px;
+                    padding: 20px;
+                    margin: 25px 0;
+                    font-family: 'Courier New', monospace;
+                    color: #00ff00;
+                    font-size: 20px;
+                    word-break: break-all;
+                ">
+                    <i class="fas fa-link"></i> ${url}
+                </div>
+                
+                <p style="color: #ffcc00; margin: 20px 0; font-size: 16px;">
+                    <i class="fas fa-info-circle"></i> Works on any phone with camera
+                </p>
+                
+                <button onclick="this.parentElement.parentElement.remove()" 
+                        style="
+                            padding: 15px 40px;
+                            background: linear-gradient(45deg, #ff3366, #ff0066);
+                            color: white;
+                            border: none;
+                            border-radius: 10px;
+                            font-size: 18px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            margin-top: 10px;
+                            transition: 0.3s;
+                        "
+                        onmouseover="this.style.transform='scale(1.05)'"
+                        onmouseout="this.style.transform='scale(1)'">
+                    <i class="fas fa-times"></i> CLOSE
+                </button>
+            </div>
+        `;
+        
+        document.body.appendChild(popup);
+    }
+    
+    // Обновляем QR код на странице при загрузке
+    window.addEventListener('load', function() {
+        const url = window.location.origin;
+        const mainQr = document.getElementById('mainQrCode');
+        if (mainQr) {
+            mainQr.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+        }
+    });
+    </script>
+</body>
+</html>
