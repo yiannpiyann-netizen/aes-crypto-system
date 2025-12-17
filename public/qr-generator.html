@@ -3,132 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔐 AES - QR Generator</title>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
+    <title>🔐 AES - QR Code Generator</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .qr-section {
+        body {
+            background: #0a0c12;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
             text-align: center;
-            margin: 40px auto;
-            padding: 30px;
-            max-width: 800px;
-            background: rgba(16, 20, 31, 0.9);
-            border-radius: 15px;
-            border: 2px solid rgba(0, 162, 255, 0.3);
-        }
-        
-        .qr-container {
-            background: white;
             padding: 20px;
-            border-radius: 10px;
-            display: inline-block;
-            margin: 25px 0;
-            box-shadow: 0 0 30px rgba(0, 162, 255, 0.3);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         
-        .site-url {
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(16, 20, 31, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            border: 2px solid rgba(0, 162, 255, 0.3);
+            box-shadow: 0 0 50px rgba(0, 162, 255, 0.2);
+        }
+        
+        h1 {
+            color: #00a2ff;
+            font-size: 42px;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00a2ff, #00fff7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            color: #a0d2ff;
+            margin-bottom: 30px;
+        }
+        
+        .qr-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 30px 0;
+            box-shadow: 0 0 40px rgba(0, 162, 255, 0.4);
+        }
+        
+        .url-display {
             background: rgba(10, 15, 25, 0.7);
-            border: 1px solid rgba(0, 162, 255, 0.3);
-            color: #00ff00;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            margin: 20px auto;
-            max-width: 600px;
+            border: 2px solid #00a2ff;
+            border-radius: 10px;
+            padding: 18px;
+            margin: 25px auto;
+            max-width: 700px;
             word-break: break-all;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
             font-size: 18px;
         }
         
         .instructions {
             text-align: left;
             background: rgba(0, 162, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
+            padding: 25px;
+            border-radius: 12px;
             margin: 30px 0;
+            border-left: 5px solid #00a2ff;
         }
         
-        .back-btn {
-            display: inline-block;
+        .instructions h3 {
+            color: #00a2ff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 12px;
+            color: #e0e0ff;
+            line-height: 1.5;
+        }
+        
+        .warning {
+            background: rgba(255, 153, 0, 0.1);
+            border: 1px solid #ff9900;
+            border-radius: 8px;
+            padding: 15px;
             margin-top: 20px;
-            padding: 12px 25px;
+            color: #ffcc00;
+        }
+        
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 35px;
             background: linear-gradient(45deg, #0066ff, #00a2ff);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 162, 255, 0.4);
+        }
+        
+        .btn i {
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="qr-section">
-        <h1 style="color: #00a2ff;">🔐 AES CRYPTOGRAPHY</h1>
-        <h2 style="color: #a0d2ff;">QR Code для доступа с телефона</h2>
+    <div class="container">
+        <h1><i class="fas fa-shield-alt"></i> AES CRYPTOGRAPHY</h1>
+        <h2><i class="fas fa-qrcode"></i> QR Code для доступа с телефона</h2>
         
-        <div class="qr-container">
-            <div id="qrcode"></div>
+        <div class="qr-box">
+            <!-- QR код будет здесь -->
+            <img id="qrcodeImage" 
+                 src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=https://aes-crypto-system.onrender.com&choe=UTF-8" 
+                 alt="QR Code" 
+                 style="width: 300px; height: 300px;">
         </div>
         
-        <div class="site-url" id="currentUrl">
-            Загрузка URL...
+        <div class="url-display">
+            <i class="fas fa-link"></i> 
+            <span id="siteUrl">https://aes-crypto-system.onrender.com</span>
+            <button onclick="copyUrl()" style="margin-left: 15px; padding: 5px 10px; background: rgba(0,162,255,0.2); color: #a0d2ff; border: 1px solid #00a2ff; border-radius: 4px; cursor: pointer;">
+                <i class="far fa-copy"></i> Копировать
+            </button>
         </div>
         
         <div class="instructions">
             <h3><i class="fas fa-mobile-alt"></i> Как использовать:</h3>
             <ol>
-                <li>Откройте <strong>камеру</strong> на телефоне</li>
-                <li>Наведите на <strong>QR код</strong> выше</li>
-                <li>Нажмите на <strong>уведомление/ссылку</strong></li>
-                <li>Откроется этот же сайт на вашем телефоне!</li>
-                <li>Используйте систему шифрования AES-256</li>
+                <li><strong>Откройте камеру</strong> на телефоне</li>
+                <li><strong>Наведите на QR код</strong> выше (или на экран)</li>
+                <li><strong>Нажмите на уведомление/ссылку</strong> которая появится</li>
+                <li><strong>Откроется этот же сайт</strong> на вашем телефоне!</li>
+                <li><strong>Используйте систему</strong> шифрования AES-256 на телефоне</li>
             </ol>
             
-            <p style="color: #ff9900; margin-top: 15px;">
-                <i class="fas fa-info-circle"></i> 
-                <strong>Важно:</strong> QR код ведет на текущий сайт. 
-                Если вы на localhost — только в вашей WiFi сети. 
-                Если на Render.com — работает везде!
-            </p>
+            <div class="warning">
+                <i class="fas fa-info-circle"></i>
+                <strong>Важно:</strong> Этот QR код ведет на публичный сайт 
+                <strong>https://aes-crypto-system.onrender.com</strong>. 
+                Он работает везде где есть интернет!
+            </div>
         </div>
         
-        <a href="/" class="back-btn">
+        <a href="/" class="btn">
             <i class="fas fa-arrow-left"></i> Вернуться к шифрованию
         </a>
+        
+        <div style="margin-top: 25px; color: #a0d2ff; font-size: 14px;">
+            <i class="fas fa-sync-alt"></i> QR код обновляется автоматически
+        </div>
     </div>
 
     <script>
-        // Получаем текущий URL сайта
-        const currentUrl = window.location.origin;
-        
-        // Показываем URL
-        document.getElementById('currentUrl').textContent = currentUrl;
-        document.getElementById('currentUrl').innerHTML = 
-            `<i class="fas fa-link"></i> ${currentUrl}`;
-        
-        // Генерируем QR код
-        QRCode.toCanvas(document.getElementById('qrcode'), currentUrl, {
-            width: 280,
-            margin: 2,
-            color: {
-                dark: '#000000',
-                light: '#FFFFFF'
-            }
-        }, function (error) {
-            if (error) {
-                console.error(error);
-                document.getElementById('qrcode').innerHTML = 
-                    '<p style="color: red; padding: 20px;">Ошибка создания QR кода</p>';
-            } else {
-                console.log("QR код создан для:", currentUrl);
-            }
-        });
-        
-        // Добавляем FontAwesome если нет
-        if (!document.querySelector('link[href*="font-awesome"]')) {
-            const fa = document.createElement('link');
-            fa.rel = 'stylesheet';
-            fa.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
-            document.head.appendChild(fa);
+        // Функция копирования URL
+        function copyUrl() {
+            const url = document.getElementById('siteUrl').textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('URL скопирован в буфер обмена!');
+            });
         }
+        
+        // Обновляем QR код при загрузке
+        window.addEventListener('load', function() {
+            const currentUrl = window.location.origin;
+            document.getElementById('siteUrl').textContent = currentUrl;
+            
+            // Обновляем QR код через Google Charts API
+            const qrImg = document.getElementById('qrcodeImage');
+            qrImg.src = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(currentUrl)}&choe=UTF-8&chld=H|0`;
+            
+            console.log("QR код создан для:", currentUrl);
+        });
     </script>
 </body>
 </html>
