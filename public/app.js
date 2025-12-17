@@ -82,7 +82,47 @@ class AESCryptoSystem {
             this.updateStatus('✗ Network error', 'error');
         }
     }
-    
+        async decrypt() {
+        const encrypted = document.getElementById('encryptedOutput').textContent;
+        const key = document.getElementById('aesKey').value;
+        const iv = document.getElementById('ivOutput').textContent;
+        
+        if (!encrypted || encrypted === 'Waiting...' || encrypted.includes('will appear')) {
+            this.updateStatus('Нет данных для расшифровки', 'warning');
+            return;
+        }
+        
+        if (!key || key.length !== 64) {
+            this.updateStatus('Неверный ключ (нужно 64 hex символа)', 'error');
+            return;
+        }
+        
+        if (!iv) {
+            this.updateStatus('Нет IV (Initialization Vector)', 'error');
+            return;
+        }
+        
+        this.updateStatus('Расшифровка...', 'processing');
+        
+        try {
+            const response = await fetch(`${this.baseURL}/api/decrypt`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ encrypted, key, iv })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                document.getElementById('inputText').value = result.decrypted;
+                this.updateStatus('✓ Расшифровка успешна!', 'success');
+            } else {
+                this.updateStatus('✗ Ошибка: ' + (result.error || 'Неверный ключ или данные'), 'error');
+            }
+        } catch (error) {
+            this.updateStatus('✗ Ошибка сети', 'error');
+        }
+    }
     copyKey() {
         const keyInput = document.getElementById('aesKey');
         keyInput.select();
@@ -118,3 +158,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.aesSystem = new AESCryptoSystem();
 
 });
+
