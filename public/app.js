@@ -1,7 +1,7 @@
 // AES Frontend System
 class AESCryptoSystem {
     constructor() {
-        this.baseURL = 'http://192.168.8.133:3000';
+        this.baseURL = window.location.origin;
         this.init();
     }
     
@@ -116,4 +116,5 @@ class AESCryptoSystem {
 // Запуск при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     window.aesSystem = new AESCryptoSystem();
+
 });
