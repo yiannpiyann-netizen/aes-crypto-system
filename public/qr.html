@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔐 AES CRYPTOGRAPHY - QR Code</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        body {
+            background: #0a0c12;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            background: linear-gradient(45deg, #00a2ff, #00fff7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #a0d2ff;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        .qr-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 0 30px rgba(0, 162, 255, 0.3);
+        }
+        .url-box {
+            background: rgba(0, 162, 255, 0.1);
+            border: 1px solid rgba(0, 162, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+        }
+        .instructions {
+            background: rgba(16, 20, 31, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+            border: 1px solid rgba(0, 162, 255, 0.2);
+        }
+        .instructions h3 {
+            color: #00a2ff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .instructions li {
+            margin-bottom: 10px;
+            color: #a0d2ff;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #0066ff, #00a2ff);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 AES CRYPTOGRAPHY</h1>
+        <p class="subtitle">Scan QR code to access on mobile</p>
+        
+        <div class="qr-box">
+            <div id="qrcode"></div>
+        </div>
+        
+        <div class="url-box" id="siteUrl">Loading URL...</div>
+        
+        <a href="/" class="btn">
+            <i class="fas fa-lock"></i> Open Main Site
+        </a>
+        
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> How to Connect:</h3>
+            <ol>
+                <li>Make sure your phone is connected to the <strong>same WiFi network</strong></li>
+                <li>Open camera app and scan the QR code above</li>
+                <li>Tap the notification to open the AES Cryptography site</li>
+                <li>Use the system to encrypt/decrypt messages with AES-256</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Генерируем URL для вашего IP
+        const ip = '192.168.8.133';
+        const port = '3000';
+        const siteUrl = `http://${ip}:${port}`;
+        
+        // Показываем URL
+        document.getElementById('siteUrl').innerHTML = 
+            `<i class="fas fa-link"></i> ${siteUrl}`;
+        
+        // Генерируем QR код
+        QRCode.toCanvas(document.getElementById('qrcode'), siteUrl, {
+            width: 250,
+            margin: 2,
+            color: {
+                dark: '#000000',
+                light: '#FFFFFF'
+            }
+        }, function (error) {
+            if (error) {
+                console.error(error);
+                document.getElementById('qrcode').innerHTML = 
+                    '<p style="color: red;">QR Error</p>';
+            }
+        });
+        
+        // Добавляем иконки Font Awesome
+        const fa = document.createElement('link');
+        fa.rel = 'stylesheet';
+        fa.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+        document.head.appendChild(fa);
+    </script>
+</body>
+</html>

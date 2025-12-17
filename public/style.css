@@ -1,0 +1,314 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+} 
+body { 
+    background: #0a0c12; 
+    color: white; 
+    min-height: 100vh; 
+    overflow-x: hidden; 
+} 
+.cyber-hero { 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    position: relative; 
+    text-align: center; 
+} 
+.hero-bg { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    z-index: -1; 
+} 
+.cyber-grid { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    background-image:  
+        linear-gradient(rgba(0, 150, 255, 0.1) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(0, 150, 255, 0.1) 1px, transparent 1px); 
+    background-size: 50px 50px; 
+} 
+.glow { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    background: radial-gradient(circle at center,  
+        rgba(0, 100, 255, 0.2) 0%, 
+        transparent 70%); 
+} 
+.title-block { 
+    margin-bottom: 40px; 
+} 
+.title-line { 
+    width: 300px; 
+    height: 2px; 
+    background: linear-gradient(90deg, transparent, #00a2ff, transparent); 
+    margin: 20px auto; 
+} 
+.main-title { 
+    font-size: 80px; 
+    font-weight: 900; 
+    background: linear-gradient(45deg, #00a2ff, #00fff7); 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    color: transparent; 
+    margin-bottom: 10px; 
+    text-shadow: 0 0 30px rgba(0, 162, 255, 0.3); 
+} 
+.sub-title { 
+    font-size: 40px; 
+    color: white; 
+    margin-bottom: 20px; 
+    letter-spacing: 3px; 
+    text-shadow: 0 0 20px rgba(0, 162, 255, 0.2); 
+} 
+.tagline { 
+    color: #a0d2ff; 
+    font-size: 18px; 
+    letter-spacing: 3px; 
+    margin-top: 20px; 
+    text-transform: uppercase; 
+} 
+.hero-buttons { 
+    display: flex; 
+    gap: 20px; 
+    margin-top: 30px; 
+} 
+.cyber-btn { 
+    padding: 15px 30px; 
+    background: transparent; 
+    color: #00fff7; 
+    border: 2px solid #00a2ff; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+    border-radius: 0; 
+} 
+.cyber-btn:hover { 
+    background: rgba(0, 162, 255, 0.1); 
+    box-shadow: 0 0 20px rgba(0, 162, 255, 0.5); 
+    transform: translateY(-2px); 
+} 
+.system-section { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 50px 20px; 
+} 
+.system-section h2 { 
+    text-align: center; 
+    font-size: 36px; 
+    margin-bottom: 40px; 
+    color: white; 
+} 
+.highlight { 
+    background: linear-gradient(45deg, #00a2ff, #00fff7); 
+    -webkit-background-clip: text; 
+    background-clip: text; 
+    color: transparent; 
+} 
+.system-container { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 30px; 
+    background: rgba(16, 20, 31, 0.8); 
+    border: 1px solid rgba(0, 162, 255, 0.2); 
+    border-radius: 10px; 
+    padding: 30px; 
+    backdrop-filter: blur(10px); 
+} 
+.input-panel, .output-panel { 
+    padding: 20px; 
+} 
+.input-panel h3, .output-panel h3 { 
+    color: #00a2ff; 
+    margin-bottom: 25px; 
+    font-size: 22px; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+} 
+.input-group { 
+    margin-bottom: 20px; 
+} 
+.input-group label { 
+    display: block; 
+    color: #a0d2ff; 
+    margin-bottom: 8px; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    font-size: 14px; 
+    letter-spacing: 1px; 
+} 
+textarea, input { 
+    width: 100%; 
+    padding: 12px; 
+    background: rgba(10, 15, 25, 0.7); 
+    border: 1px solid rgba(0, 162, 255, 0.3); 
+    color: white; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    resize: vertical; 
+    font-family: monospace; 
+} 
+textarea:focus, input:focus { 
+    outline: none; 
+    border-color: #00a2ff; 
+    box-shadow: 0 0 10px rgba(0, 162, 255, 0.3); 
+} 
+textarea { 
+    min-height: 100px; 
+} 
+.key-actions { 
+    display: flex; 
+    gap: 10px; 
+    margin-top: 10px; 
+} 
+.key-actions button { 
+    flex: 1; 
+    padding: 8px; 
+    background: rgba(0, 162, 255, 0.1); 
+    border: 1px solid rgba(0, 162, 255, 0.3); 
+    color: #a0d2ff; 
+    cursor: pointer; 
+    border-radius: 3px; 
+    transition: 0.3s; 
+} 
+.key-actions button:hover { 
+    background: rgba(0, 162, 255, 0.2); 
+} 
+.button-group { 
+    display: flex; 
+    gap: 15px; 
+    margin-top: 25px; 
+} 
+.btn { 
+    flex: 1; 
+    padding: 15px; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s; 
+} 
+.btn.encrypt { 
+    background: linear-gradient(45deg, #0066ff, #00a2ff); 
+    color: white; 
+} 
+.btn.decrypt { 
+    background: transparent; 
+    color: #00fff7; 
+    border: 2px solid #00a2ff; 
+} 
+.btn:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 5px 15px rgba(0, 162, 255, 0.3); 
+} 
+.result { 
+    margin-bottom: 20px; 
+} 
+.output { 
+    background: rgba(10, 15, 25, 0.7); 
+    border: 1px solid rgba(0, 162, 255, 0.3); 
+    color: #00fff7; 
+    padding: 12px; 
+    border-radius: 5px; 
+    font-family: 'Courier New', monospace; 
+    min-height: 50px; 
+    word-break: break-all; 
+    margin-top: 5px; 
+    font-size: 14px; 
+} 
+.status { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    margin-top: 30px; 
+    padding: 10px; 
+    background: rgba(10, 15, 25, 0.5); 
+    border-radius: 5px; 
+} 
+.status-dot { 
+    width: 12px; 
+    height: 12px; 
+    background: #00ff00; 
+    border-radius: 50%; 
+    animation: pulse 2s infinite; 
+} 
+@keyframes pulse { 
+    0%, 100% { opacity: 1; } 
+    50% { opacity: 0.5; } 
+} 
+@media (max-width: 768px) { 
+    .system-container { 
+        grid-template-columns: 1fr; 
+    } 
+    .main-title { 
+        font-size: 50px; 
+    } 
+    .sub-title { 
+        font-size: 30px; 
+    } 
+    .hero-buttons { 
+        flex-direction: column; 
+    } 
+    .title-line { 
+        width: 200px; 
+    } 
+} 
+/* Добавьте в конец style.css */
+
+/* Анимации как на киберпанк шаблоне */
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+.main-title {
+    animation: glitch 0.5s infinite;
+}
+
+/* Пульсирующие точки как на картинке */
+.title-line::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #00fff7;
+    border-radius: 50%;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 15px #00fff7;
+    animation: pulse 1.5s infinite;
+}
+
+/* Эффект сканирования */
+.scan-effect {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00fff7, transparent);
+    top: 0;
+    animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+    0% { top: 0; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
